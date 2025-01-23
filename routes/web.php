@@ -25,10 +25,19 @@ require __DIR__ . '/auth.php';
 // Admin Group
 Route::middleware(['auth', Role::class . ':admin'])->group(function () {
 
-    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dasgboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
+
 });
+
+// Get Admin Login page
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 
 // Instructor Group
 Route::middleware(['auth', Role::class . ':instructor'])->group(function () {
     Route::get('/instructor/dashboard', [InstructorController::class, 'InstructorDashboard'])->name('instructor.dasgboard');
 });
+
+
+// section 3 v 10
