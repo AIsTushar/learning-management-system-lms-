@@ -40,7 +40,16 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 // Instructor Group
 Route::middleware(['auth', Role::class . ':instructor'])->group(function () {
     Route::get('/instructor/dashboard', [InstructorController::class, 'InstructorDashboard'])->name('instructor.dasgboard');
+    Route::get('/instructor/logout', [InstructorController::class, 'InstructorLogout'])->name('instructor.logout');
+    Route::get('/instructor/profile', [InstructorController::class, 'InstructorProfile'])->name('instructor.profile');
+    Route::post('/instructor/profile/store', [InstructorController::class, 'InstructorProfileStore'])->name('instructor.profile.store');
+    Route::get('/instructor/change/password', [InstructorController::class, 'InstructorChangePassword'])->name('instructor.change.password');
+    Route::post('/instructor/password/update', [InstructorController::class, 'InstructorPasswordUpdate'])->name('instructor.password.update');
 });
 
 
-// section 4 v 1
+// Get Instructor Login page
+Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
+
+
+// s 5 v 1
