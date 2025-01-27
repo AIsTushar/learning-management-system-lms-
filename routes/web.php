@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserController::class, 'Index'])->name('index');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('frontend.dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -52,4 +52,4 @@ Route::middleware(['auth', Role::class . ':instructor'])->group(function () {
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
 
 
-// s 5 v 3
+// s 6 v 2
