@@ -92,22 +92,22 @@
 
                     <div class="card-body">
                         <div class="row mb-3">
-                        <div class="col-sm-3">
-                            <h6 class="mb-0">Old Password</h6>
-                        </div>
-                        <div class="col-sm-9 text-secondary">
-                            <input
-                            type="password"
-                            class="form-control @error('old_password') is-invalid @enderror "
-                            name="old_password"
-                            id="old_password"
-                            />
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Old Password</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                <input
+                                type="password"
+                                class="form-control @error('old_password') is-invalid @enderror "
+                                name="old_password"
+                                id="old_password"
+                                />
 
-                            @error('old_password')
-                                <span>{{$message}}</span>
-                            @enderror
+                                @error('old_password')
+                                    <span>{{$message}}</span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
                         <div class="row mb-3">
                             <div class="col-sm-3">
@@ -116,7 +116,7 @@
                             <div class="col-sm-9 text-secondary">
                                 <input
                                 type="password"
-                                class="form-control @error('new_password') is-invalid @enderror "
+                                class="form-control @error('new_password') is-invalid @enderror"
                                 name="new_password"
                                 id="new_password"
                                 />

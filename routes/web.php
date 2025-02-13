@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Role;
 use Illuminate\Support\Facades\Route;
@@ -14,10 +15,20 @@ Route::get('/dashboard', function () {
     return view('frontend.dashboard.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
+// Login Route
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
+// Register Route
+Route::post('/register', [RegisteredUserController::class, 'store'])->name('register');
+
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/user/profile', [UserController::class, 'userProfile'])->name('user.profile');
+    Route::post('/user/profile/update', [UserController::class, 'userProfileUpdate'])->name('user.profile.update');
+    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
+    Route::get('/user/change/password', [UserController::class, 'UserChangePassword'])->name('user.change.password');
+    Route::post('/user/password/update', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
+
 });
 
 require __DIR__ . '/auth.php';
@@ -52,4 +63,5 @@ Route::middleware(['auth', Role::class . ':instructor'])->group(function () {
 Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin'])->name('instructor.login');
 
 
-// s 6 v 2
+
+// s7 v1

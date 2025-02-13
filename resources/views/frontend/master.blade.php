@@ -20,17 +20,19 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/fancybox.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/tooltipster.bundle.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <!-- end inject -->
 </head>
 <body>
 <!-- start cssload-loader -->
-<div class="preloader">
+{{-- <div class="preloader">
     <div class="loader">
         <svg class="spinner" viewBox="0 0 50 50">
             <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
         </svg>
     </div>
-</div>
+</div> --}}
 <!-- end cssload-loader -->
 <!--======================================
         START HEADER AREA
@@ -206,5 +208,72 @@
 <script src="{{ asset('frontend/js/tooltipster.bundle.min.js') }}"></script>
 <script src="{{ asset('frontend/js/jquery.lazy.min.js') }}"></script>
 <script src="{{ asset('frontend/js/main.js') }}"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+{{-- <script>
+ @if(Session::has('message'))
+ var type = "{{ Session::get('alert-type','info') }}"
+ switch(type){
+    case 'info':
+    toastr.info(" {{ Session::get('message') }} ");
+    break;
+    case 'success':
+    toastr.success(" {{ Session::get('message') }} ");
+    break;
+    case 'warning':
+    toastr.warning(" {{ Session::get('message') }} ");
+    break;
+    case 'error':
+    toastr.error(" {{ Session::get('message') }} ");
+    break;
+ }
+ @endif
+</script> --}}
+
+
+<script>
+    $(document).ready(function() {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        @if (Session::has('success'))
+            toastr.success('{{ Session::get('success') }}');
+        @endif
+
+        @if (Session::has('error'))
+            toastr.error('{{ Session::get('error') }}');
+        @endif
+
+        @if (Session::has('info'))
+            toastr.info('{{ Session::get('info') }}');
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.warning('{{ Session::get('warning') }}');
+        @endif
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error('{{ $error }}');
+            @endforeach
+        @endif
+    });
+</script>
+
 </body>
 </html>
