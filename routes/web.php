@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\Role;
@@ -43,6 +44,30 @@ Route::middleware(['auth', Role::class . ':admin'])->group(function () {
     Route::get('/admin/change/password', [AdminController::class, 'AdminChangePassword'])->name('admin.change.password');
     Route::post('/admin/password/update', [AdminController::class, 'AdminPasswordUpdate'])->name('admin.password.update');
 
+    // Category Controller
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/all/category', 'AllCategory')->name('all.category');
+        Route::get('/add/category', 'AddCategory')->name('add.category');
+        Route::get('/edit/category/{id}', 'EditCategory')->name('edit.category');
+        Route::post('/store/category', 'StoreCategory')->name('store.category');
+        Route::post('/update/category', 'UpdateCategory')->name('update.category');
+        Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category');
+
+    });
+
+    // Sub Category Controller
+    Route::controller(CategoryController::class)->group(function () {
+        Route::get('/all/subcategory', 'AllSubCategory')->name('all.subcategory');
+        Route::get('/add/subcategory', 'AddSubCategory')->name('add.subcategory');
+        Route::post('/store/subcategory', 'StoreSubCategory')->name('store.category');
+        Route::get('/edit/subcategory/{id}', 'EditSubCategory')->name('edit.subcategory');
+        Route::post('/update/subcategory', 'UpdateSubCategory')->name('update.subcategory');
+        Route::get('/delete/subcategory/{id}', 'DeleteSubCategory')->name('delete.subcategory');
+
+
+
+    });
+
 });
 
 // Get Admin Login page
@@ -64,4 +89,4 @@ Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin']
 
 
 
-// s7 v1
+// s9 v1

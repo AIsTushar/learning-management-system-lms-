@@ -15,6 +15,9 @@
 	<!-- loader-->
 	<link href="{{asset('backend/assets/css/pace.min.css')}}" rel="stylesheet"/>
 	<script src="{{asset('backend/assets/js/pace.min.js')}}"></script>
+	<script src="{{asset('backend/assets/js/validate.min.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="{{ asset('backend/assets/js/code.js') }}"></script>
 	<!-- Bootstrap CSS -->
 	<link href="{{asset('backend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="{{asset('backend/assets/css/bootstrap-extended.css')}}" rel="stylesheet">
@@ -26,6 +29,9 @@
 	<link rel="stylesheet" href="{{asset('backend/assets/css/semi-dark.css')}}"/>
 	<link rel="stylesheet" href="{{asset('backend/assets/css/header-colors.css')}}"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+
+    {{-- Data table --}}
+    <link href="{{asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
 	<title>Admin Dashboard</title>
 </head>
 
@@ -81,7 +87,20 @@
 		new PerfectScrollbar(".app-container")
 	</script>
 
+
+    {{-- Data Table --}}
+    <script src="{{asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('backend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        } );
+    </script>
+
+{{-- End DataTable --}}
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
 
 <script>
  @if(Session::has('message'))
@@ -105,6 +124,51 @@
  }
  @endif
 </script>
+
+
+{{-- <script>
+    $(document).ready(function() {
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
+
+        @if (Session::has('success'))
+            toastr.success('{{ Session::get('success') }}');
+        @endif
+
+        @if (Session::has('error'))
+            toastr.error('{{ Session::get('error') }}');
+        @endif
+
+        @if (Session::has('info'))
+            toastr.info('{{ Session::get('info') }}');
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.warning('{{ Session::get('warning') }}');
+        @endif
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error('{{ $error }}');
+            @endforeach
+        @endif
+    });
+</script> --}}
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
