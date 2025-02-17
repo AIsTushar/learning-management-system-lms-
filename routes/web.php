@@ -63,8 +63,14 @@ Route::middleware(['auth', Role::class . ':admin'])->group(function () {
         Route::get('/edit/subcategory/{id}', 'EditSubCategory')->name('edit.subcategory');
         Route::post('/update/subcategory', 'UpdateSubCategory')->name('update.subcategory');
         Route::get('/delete/subcategory/{id}', 'DeleteSubCategory')->name('delete.subcategory');
+    });
 
 
+
+    // Instructor All Route
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/all/instructor', 'AllInstructor')->name('all.instructor');
+        Route::post('/update/user/stauts', 'UpdateUserStatus')->name('update.user.stauts');
 
     });
 
@@ -72,6 +78,10 @@ Route::middleware(['auth', Role::class . ':admin'])->group(function () {
 
 // Get Admin Login page
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+// Become Instructor get form route
+Route::get('/become/instructor', [AdminController::class, 'BecomeInstructor'])->name('become.instructor');
+// Instructor Register post route
+Route::post('/instructor/register', [AdminController::class, 'InstructorRegister'])->name('instructor.register');
 
 // Instructor Group
 Route::middleware(['auth', Role::class . ':instructor'])->group(function () {
@@ -89,4 +99,6 @@ Route::get('/instructor/login', [InstructorController::class, 'InstructorLogin']
 
 
 
-// s9 v1
+
+
+// s11 v1
